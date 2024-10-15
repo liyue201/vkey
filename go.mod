@@ -1,4 +1,4 @@
-module github.com/liyue/vkey
+module github.com/liyue201/vkey
 
 go 1.19
 
