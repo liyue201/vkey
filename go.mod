@@ -2,9 +2,8 @@ module github.com/liyue201/vkey
 
 go 1.19
 
-require github.com/consensys/gnark v0.7.1
-
 require (
+	github.com/consensys/gnark v0.7.1
 	github.com/consensys/gnark-crypto v0.7.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
