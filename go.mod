@@ -16,6 +16,8 @@ require (
 
 replace github.com/consensys/gnark v0.7.1 => github.com/stirlingx001/gnark v0.0.0-20240918053953-7e81a4765069
 
+require github.com/stirlingx001/vksol v0.0.0-20241016084416-6057102ce9de
+
 require (
 	github.com/rs/zerolog v1.29.1 // indirect
 	golang.org/x/sys v0.24.0 // indirect

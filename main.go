@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/consensys/gnark/backend/groth16"
 	groth16_bn254 "github.com/consensys/gnark/internalx/backend/bn254/groth16"
+	"github.com/stirlingx001/vksol"
 	"os"
 )
 
@@ -31,9 +33,24 @@ func saveJson(vk *groth16_bn254.VerifyingKey, filename string) error {
 	return os.WriteFile(filename, vkJSON, 0644)
 }
 
-func saveSolidity(vk *groth16_bn254.VerifyingKey, filename string) error {
+func saveSolidity2(vk *groth16_bn254.VerifyingKey, filename string) error {
 	b := bytes.Buffer{}
 	vk.ExportSolidity(&b)
+	return os.WriteFile(filename, b.Bytes(), 0766)
+}
+
+func saveSolidity(vk groth16.VerifyingKey, filename string) error {
+	vkJSON, err := json.Marshal(vk)
+	if err != nil {
+		return err
+	}
+	vkey := vksol.VerifyingKey{}
+	err = json.Unmarshal(vkJSON, &vkey)
+	if err != nil {
+		return err
+	}
+	b := bytes.Buffer{}
+	vkey.ExportSolidity(&b)
 	return os.WriteFile(filename, b.Bytes(), 0766)
 }
 
