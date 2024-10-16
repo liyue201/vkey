@@ -9,35 +9,6 @@ import (
 	"os"
 )
 
-func LoadVk2(filename string) {
-	d, err := os.ReadFile(filename + ".vk")
-	if err != nil {
-		panic(err)
-	}
-	buffer := bytes.NewBuffer(d)
-	vk := groth16_bn254.VerifyingKey{}
-	_, err = vk.ReadFrom(buffer)
-	if err != nil {
-		panic(err)
-	}
-
-	// 将验证密钥序列化为 JSON 格式
-	vkJSON, err := json.MarshalIndent(&vk, "", "    ")
-	if err != nil {
-		panic(err)
-	}
-	// 将 JSON 数据写入文件
-	err = os.WriteFile(filename+".json", vkJSON, 0644)
-	if err != nil {
-		panic(err)
-	}
-
-	// solidity
-	b := bytes.Buffer{}
-	vk.ExportSolidity(&b)
-	os.WriteFile(filename+".sol", b.Bytes(), 0766)
-}
-
 func loadVk(filename string) (*groth16_bn254.VerifyingKey, error) {
 	d, err := os.ReadFile(filename)
 	if err != nil {
